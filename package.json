@@ -1,7 +1,7 @@
 {
    "name":"jadewatch",
    "description":"jade folder watcher",
-   "version":"0.0.2",
+   "version":"0.0.3",
    "homepage":"http://github.com/rc1/jadewatch",
    "repository":"git://github.com/rc1/jadewatch.git",
    "author":"Ross Cairns <io@theworkers.net> (http://theworkers.net/)",
@@ -13,7 +13,8 @@
    "dependencies":{
       "jade":"*",
       "commander":"*",
-      "cli-color":"*"
+      "cli-color":"*",
+      "pretty-data":"0.30.3"
    },
    "engines":{
       "node":">= 0.6.14"

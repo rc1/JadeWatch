@@ -1,10 +1,11 @@
-var version = '0.0.2';
+var version = '0.0.3';
 
 var jade = require('jade');
 var program = require('commander');
 var fs = require('fs');
 var path = require('path');
 var clc = require('cli-color');
+var pd = require('pretty-data').pd;
 
 var error = clc.red.bold;
 var warn = clc.yellow;
@@ -14,6 +15,7 @@ var good = clc.green;
 program
     .version(version)
     .option('-e, --extension [extension]', 'output filename extension (default: html)', 'html')
+    .option('-b, --beautify', 'beautify output')
     .parse(process.argv);
 
 
@@ -39,11 +41,15 @@ fs.readdir(".", function (err, files) {
                 //jade.compile(data)();
                 var outputfilename = path.basename(jadefilename, ".jade")+"."+program.extension;
                 var time = new Date();
+                var compliedData;
                 try {
-                    var compliedData = jade.compile(data)();
+                    compliedData = jade.compile(data)({development:true});
                 } catch (err) {
                     console.warn(error(jadefilename), err, time.toTimeString());
                     return;
+                }
+                if (program.beautify) {
+                    compliedData = pd.xml(compliedData);
                 }
                 fs.writeFile(outputfilename, compliedData, function (err) {
                     if (err) { console.log(err); }
