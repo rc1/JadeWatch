@@ -22,6 +22,6 @@ Output filename extension. Defaults is `html`.
     watching 1 jade files for changes. (jadewatch 0.0.3)
     file.jade > file.xsl 13:00:08 GMT+0100 (BST)
 
-Output beatified hhtml extension. 
+Output beatified html. Use this options to have human readable html.
 
     $ jadewatch -b
