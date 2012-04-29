@@ -8,7 +8,7 @@
 
     $ cd folder/with/jade/files
     $ jadewatch
-    watching 1 jade files for changes. (jadewatch 0.0.3)
+    watching 1 jade files for changes. 
 
 ## help
 
@@ -19,7 +19,7 @@
 Output filename extension. Defaults is `html`.
 
     $ jadewatch -e xsl
-    watching 1 jade files for changes. (jadewatch 0.0.3)
+    watching 1 jade files for changes. 
     file.jade > file.xsl 13:00:08 GMT+0100 (BST)
 
 Output beatified html. Use this options to have human readable html.
