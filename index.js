@@ -3,6 +3,7 @@ var version = '0.0.4';
 var jade = require('jade');
 var program = require('commander');
 var fs = require('fs');
+var read = require('fs-readdir-recursive');
 var path = require('path');
 var clc = require('cli-color');
 var pd = require('pretty-data').pd;
@@ -16,10 +17,12 @@ program
     .version(version)
     .option('-e, --extension [extension]', 'output filename extension (default: html)', 'html')
     .option('-b, --beautify', 'beautify output')
+    .option('-o, --out [out]', 'relative output path for each file')
     .parse(process.argv);
 
 
-fs.readdir(".", function (err, files) {
+var files = read('.');
+(function (err, files) {
     if (err) { console.log(err); return; }
     var jadeFiles = [];
     var i;
@@ -36,7 +39,7 @@ fs.readdir(".", function (err, files) {
         if (!jadefilename) { return; }
         fs.readFile(jadefilename, function (err, data) {
             if (err) { console.log(err); return; }
-            var outputfilename = path.basename(jadefilename, ".jade")+"."+program.extension;
+            var outputfilename = path.dirname(jadefilename) + '/' + program.out + path.basename(jadefilename, ".jade") + "." + program.extension;
             var time = new Date();
             var compliedData;
             try {
@@ -69,6 +72,6 @@ fs.readdir(".", function (err, files) {
     }
 
     console.log("watching", jadeFiles.length, "jade files for changes.", notice("(jadewatch "+version+")"));
-});
+})(!files, files);
 
 // var name  = path.basename(p, ".jade")
